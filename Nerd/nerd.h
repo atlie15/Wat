@@ -9,6 +9,7 @@ public:
 private:
     char sex;
     int yearBorn;
+    int yearDeath;
 };
 
 #endif // NERD_H
