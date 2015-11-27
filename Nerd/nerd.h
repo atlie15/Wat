@@ -8,6 +8,7 @@ public:
     Nerd();
 private:
     char sex;
+    int yearBorn;
 };
 
 #endif // NERD_H
