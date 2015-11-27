@@ -9,7 +9,8 @@ public:
 private:
     char sex;
     int yearBorn;
-    int dead;
+    int yearDeath;
+    double swagPoints;
 };
 
 #endif // NERD_H
