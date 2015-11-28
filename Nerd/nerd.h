@@ -4,6 +4,7 @@
 #include <QString>
 #include <iostream>
 #include <vector>
+#include <string>
 
 using namespace std;
 
@@ -11,9 +12,17 @@ class Nerd
 {
 public:
     Nerd();
-    friend void make(vector<Nerd> a);
+    Nerd(string newName, char newSex, int newYearBorn, int newYearD);
+    string getName() const;
+    char getGender() const;
+    int getYearBorn() const;
+    int getYearDeath() const;
+    void setName(string n);
+    void setGender(char s);
+    void setYearBorn(int yB);
+    void setYearDeath(int yD);
 private:
-    QString name;
+    string name;
     char sex;
     int yearBorn;
     int yearDeath;
