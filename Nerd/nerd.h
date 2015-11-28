@@ -1,7 +1,5 @@
 #ifndef NERD_H
 #define NERD_H
-
-#include <QString>
 #include <iostream>
 #include <vector>
 #include <string>
@@ -12,7 +10,7 @@ class Nerd
 {
 public:
     Nerd();
-    Nerd(string newName, char newSex, int newYearBorn, int newYearD);
+    Nerd(string newName, char newSex, int newYearBorn, int newYearDeath);
     string getName() const;
     char getGender() const;
     int getYearBorn() const;

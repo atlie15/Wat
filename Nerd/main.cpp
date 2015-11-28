@@ -2,25 +2,29 @@
 #include <iostream>
 #include "nerd.h"
 #include <vector>
-#include <QString>
-#include <QTextStream>
 #include <string>
 
 using namespace std;
 
-void fillVector(vector<Nerd> &ComputerScientists);
+void addScientists(vector<Nerd> &ComputerScientists);
 void printOutScientists(const vector<Nerd> &ComputerScientists);
+void pickOptions(int &number);
 
 int main()
 {
     vector<Nerd> ComputerScientists;
+    int chooseNumber;
+    pickOptions(chooseNumber);
 
-    fillVector(ComputerScientists);
-    printOutScientists(ComputerScientists);
+
+
+    //addScientists(ComputerScientists);
+    //printOutScientists(ComputerScientists);
+    cout << endl;
     return 0;
 }
 
-void fillVector(vector<Nerd> &ComputerScientists)
+void addScientists(vector<Nerd> &ComputerScientists)
 {
     string name;
     char sex;
@@ -50,13 +54,21 @@ void fillVector(vector<Nerd> &ComputerScientists)
 
 void printOutScientists(const vector<Nerd> &ComputerScientists)
 {
-    //cout << "\t name \t" << "sex" << endl;
-
-    for(int i = 0; i < ComputerScientists.size(); i++)
+    for(unsigned int i = 0; i < ComputerScientists.size(); i++)
     {
         cout << "Name: " << ComputerScientists[i].getName() << endl;
         cout << "Sex: " << ComputerScientists[i].getGender() << endl;
         cout << "Year born: " << ComputerScientists[i].getYearBorn() << endl;
         cout << "Year death: " << ComputerScientists[i].getYearDeath() << endl;
     }
+}
+
+void pickOptions(int &number)
+{
+    cout << "Welcome to the Ultimade guide of Computer Scientists!" << endl;
+    cout << "-----------------------------------------------------" << endl;
+    cout << "\t1. Show a list of every computer scientists" << endl;
+    cout << "\t2. Add computer scientist to the list" << endl;
+    cout << "\tPlease select a number: ";
+    cin >> number;
 }
