@@ -1,22 +1,23 @@
-#include <QCoreApplication>
 #include <iostream>
-#include "nerd.h"
 #include <vector>
-#include <QString>
-#include <QTextStream>
 #include <string>
+#include <fstream>
+#include <cstdlib>
+
+#include "nerd.h"
 
 using namespace std;
 
 void fillVector(vector<Nerd> &ComputerScientists);
 void printOutScientists(const vector<Nerd> &ComputerScientists);
+void addNerd();
 
 int main()
 {
     vector<Nerd> ComputerScientists;
 
-    fillVector(ComputerScientists);
-    printOutScientists(ComputerScientists);
+    addNerd();
+
     return 0;
 }
 
@@ -52,11 +53,47 @@ void printOutScientists(const vector<Nerd> &ComputerScientists)
 {
     //cout << "\t name \t" << "sex" << endl;
 
-    for(int i = 0; i < ComputerScientists.size(); i++)
+    for(unsigned int i = 0; i < ComputerScientists.size(); i++)
     {
         cout << "Name: " << ComputerScientists[i].getName() << endl;
         cout << "Sex: " << ComputerScientists[i].getGender() << endl;
         cout << "Year born: " << ComputerScientists[i].getYearBorn() << endl;
         cout << "Year death: " << ComputerScientists[i].getYearDeath() << endl;
     }
+}
+
+void addNerd()
+{
+    string name;
+    char sex;
+    int yearBorn;
+    int yearDeath;
+    char ans;
+
+    ofstream ut;
+
+    ut.open("../../nerds.txt", std::ios_base::app);
+
+    do
+    {
+        cout << "Scientist name: ";
+        cin >> name;
+        cout << "Gender: ";
+        cin >> sex;
+        cout << "Born: ";
+        cin >> yearBorn;
+        cout << "Death: ";
+        cin >> yearDeath;
+
+        ut << name << ";";
+        ut << sex << ";";
+        ut << yearBorn << ";";
+        ut << yearDeath << endl;
+
+        cout << "Would you like to input more Nerds (y/n)? ";
+        cin >> ans;
+
+    }while(ans == 'y' || ans=='Y');
+
+    ut.close();
 }
