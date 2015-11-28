@@ -1,12 +1,24 @@
 #include <QCoreApplication>
 #include <iostream>
 #include "nerd.h"
+#include <vector>
+#include <QString>
+#include <QTextStream>
 
 using namespace std;
 
 int main()
 {
-    cout << "lik on mi nuts and suk ma dik\n";
+    QTextStream qtin(stdin);
+
+    vector<Nerd> ble;
+
+    QString nafn;
+
+    cout << "Enter name : ";
+    nafn = qtin.readLine();
+
+    QTextStream(stdout) << "Yo name is: " << nafn << endl;
 
     return 0;
 }
