@@ -1,7 +1,5 @@
 #ifndef NERD_H
 #define NERD_H
-
-#include <QString>
 #include <iostream>
 #include <vector>
 #include <string>
