@@ -10,20 +10,21 @@ class Nerd
 {
 public:
     Nerd();
-    Nerd(string newName, char newSex, int newYearBorn, int newYearDeath);
+    Nerd(string newName, string newSex, string newYearBorn, string newYearDeath);
     string getName() const;
-    char getGender() const;
-    int getYearBorn() const;
-    int getYearDeath() const;
+    string getGender() const;
+    string getYearBorn() const;
+    string getYearDeath() const;
     void setName(string n);
-    void setGender(char s);
-    void setYearBorn(int yB);
-    void setYearDeath(int yD);
+    void setGender(string s);
+    void setYearBorn(string yB);
+    void setYearDeath(string yD);
+    friend void readMann(vector<Nerd>& ComputerScientists);
 private:
     string name;
-    char sex;
-    int yearBorn;
-    int yearDeath;
+    string sex;
+    string yearBorn;
+    string yearDeath;
 };
 
 #endif // NERD_H

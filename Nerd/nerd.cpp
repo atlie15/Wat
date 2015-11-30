@@ -3,12 +3,10 @@
 #include <string>
 Nerd::Nerd()
 {
-    sex = ' ';
-    yearBorn = 0;
-    yearDeath = 0;
+
 }
 
-Nerd::Nerd(string newName, char newSex, int newYearBorn, int newYearDeath)
+Nerd::Nerd(string newName, string newSex, string newYearBorn, string newYearDeath)
 {
     name = newName;
     sex = newSex;
@@ -21,16 +19,16 @@ void Nerd::setName(string x)
     name = x;
 }
 
-void Nerd::setGender(char s){
+void Nerd::setGender(string s){
     sex = s;
 }
 
-void Nerd::setYearBorn(int yB)
+void Nerd::setYearBorn(string yB)
 {
     yearBorn = yB;
 }
 
-void Nerd::setYearDeath(int yD)
+void Nerd::setYearDeath(string yD)
 {
     yearDeath = yD;
 }
@@ -40,43 +38,18 @@ string Nerd::getName() const
     return name;
 }
 
-char Nerd::getGender() const
+string Nerd::getGender() const
 {
     return sex;
 }
 
-int Nerd::getYearBorn() const
+string Nerd::getYearBorn() const
 {
     return yearBorn;
 }
 
-int Nerd::getYearDeath() const
+string Nerd::getYearDeath() const
 {
     return yearDeath;
 }
 
-/*
-void make(vector<Nerd> a)
-{
-    char ans('\0');
-    int i = 0;
-    do
-    {
-        cout << "Name: ";
-        cin >> a[i].name;
-        cout << "Gender ('f' for female, 'm' for male): ";
-        cin >> a[i].sex;
-        cout << "Year of birth: ";
-        cin >> a[i].yearBorn;
-        cout << "Year of death: ";
-        cin >> a[i].yearDeath;
-
-
-        cout << "Would you like to make another Nerd (y/n)? ";
-        cin >> ans;
-
-        i++;
-    }
-    while (ans == 'Y' || ans == 'y');
-}
-*/
