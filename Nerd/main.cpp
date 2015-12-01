@@ -13,7 +13,7 @@ void printOutScientists(const vector<Nerd> &ComputerScientists);
 void checkOptions(string &number, vector<Nerd> &ComputerScientists);
 void addScientistsHeader(string &number, vector<Nerd> &ComputerScientists);
 void addNerd(string &number, vector<Nerd> &ComputerScientists);
-void killNerd(vector<Nerd> &ComputerScientists);
+void killNerd(const vector<Nerd> ComputerScientists);
 void pickOptions(string &number, vector<Nerd> &ComputerScientists);
 void readNerd(vector<Nerd>& ComputerScientists);
 string checkGender();
@@ -144,6 +144,8 @@ void checkOptions(string &number, vector<Nerd> &ComputerScientists)
     else if(number == "3"){
         system("CLS");
         killNerd(ComputerScientists);
+        ComputerScientists.clear();
+        readNerd(ComputerScientists);
         cout << endl << "Press Enter to return to main menu.";
         cin.get();
         system("CLS");
@@ -450,8 +452,10 @@ void findNerd(const vector<Nerd> ComputerScientists)
 }
 
 
-void killNerd(vector<Nerd>& ComputerScientists)
+void killNerd(const vector<Nerd> x)
 {
+    vector<Nerd> ComputerScientists;
+    ComputerScientists = x;
     vector<Nerd> temp;
     string ans;
     cout << "Who would you like to erase ? " << endl;
