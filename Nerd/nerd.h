@@ -19,8 +19,10 @@ public:
     void setGender(string s);
     void setYearBorn(string yB);
     void setYearDeath(string yD);
-    friend void readMann(vector<Nerd>& ComputerScientists);
-    friend void insertion_born(vector<Nerd>& ComputerScientists);
+    friend void insertion_born_desc(vector<Nerd>& ComputerScientists);
+    friend void insertion_born_asc(vector<Nerd>& ComputerScientists);
+    friend void insertion_name_az(vector<Nerd>& ComputerScientists);
+    friend void insertion_name_za(vector<Nerd>& ComputerScientists);
 private:
     string name;
     string sex;

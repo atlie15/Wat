@@ -20,7 +20,10 @@ string checkGender();
 string checkYearBorn();
 string checkYearDeath();
 string checkName();
-void insertion_born(vector<Nerd>& ComputerScientists);
+void insertion_born_desc(vector<Nerd>& ComputerScientists);
+void insertion_born_asc(vector<Nerd>& ComputerScientists);
+void insertion_name_az(vector<Nerd>& ComputerScientists);
+void insertion_name_za(vector<Nerd>& ComputerScientists);
 void chooseView(vector<Nerd>& ComputerScientists);
 
 int main()
@@ -256,14 +259,79 @@ string checkYearBorn()
     return yearBorn;
 }
 
-void insertion_born(vector<Nerd>& ComputerScientists)
+void insertion_born_desc(vector<Nerd>& ComputerScientists)
 {
+    cout << "sorting yearBorn: descending " << endl;
+    cout << endl;
+
     for (unsigned int i(0); i<(ComputerScientists.size()-1); i++)
     {
         int j=i;
         Nerd temp;
 
         while(j>=0 && atoi(ComputerScientists[j].yearBorn.c_str()) > atoi(ComputerScientists[j+1].yearBorn.c_str()))
+        {
+            temp = ComputerScientists[j];
+            ComputerScientists[j] = ComputerScientists[j+1];
+            ComputerScientists[j+1] = temp;
+            j--;
+        }
+
+    }
+}
+
+void insertion_born_asc(vector<Nerd>& ComputerScientists)
+{
+    cout << "sorting yearBorn: ascending " << endl;
+    cout << endl;
+
+    for (unsigned int i(0); i<(ComputerScientists.size()-1); i++)
+    {
+        int j=i;
+        Nerd temp;
+
+        while(j>=0 && atoi(ComputerScientists[j].yearBorn.c_str()) < atoi(ComputerScientists[j+1].yearBorn.c_str()))
+        {
+            temp = ComputerScientists[j];
+            ComputerScientists[j] = ComputerScientists[j+1];
+            ComputerScientists[j+1] = temp;
+            j--;
+        }
+
+    }
+}
+
+void insertion_name_az(vector<Nerd>& ComputerScientists)
+{
+    cout << "sorting name: A-Z " << endl;
+    cout << endl;
+
+    for (unsigned int i(0); i<(ComputerScientists.size()-1); i++)
+    {
+        int j=i;
+        Nerd temp;
+
+        while(j>=0 && ComputerScientists[j].name > ComputerScientists[j+1].name)
+        {
+            temp = ComputerScientists[j];
+            ComputerScientists[j] = ComputerScientists[j+1];
+            ComputerScientists[j+1] = temp;
+            j--;
+        }
+    }
+}
+
+void insertion_name_za(vector<Nerd>& ComputerScientists)
+{
+    cout << "sorting name: Z-A " << endl;
+    cout << endl;
+
+    for (unsigned int i(0); i<(ComputerScientists.size()-1); i++)
+    {
+        int j=i;
+        Nerd temp;
+
+        while(j>=0 && ComputerScientists[j].name < ComputerScientists[j+1].name)
         {
             temp = ComputerScientists[j];
             ComputerScientists[j] = ComputerScientists[j+1];
@@ -278,20 +346,37 @@ void chooseView(vector<Nerd>& ComputerScientists)
     int number;
     cout << "How would you like to view the list?" << endl;
     cout << "\t1. Name in alphabetical order [A-Z]" << endl;
-    cout << "\t2. Year of birth [descending]" << endl;
-    cout << "\t3. Default" << endl;
+    cout << "\t2. Name in alphabetical order [Z-A]" << endl;
+    cout << "\t3. Year of birth [descending]" << endl;
+    cout << "\t4. Year of birth [ascending]" << endl;
+    cout << "\t9. Quit program." << endl;
     cout << endl;
     cout << "Please select a number: ";
     cin >> number;
     cout << endl;
-    if (number == 2)
+    if (number == 1)
     {
-        insertion_born(ComputerScientists);
+        insertion_name_az(ComputerScientists);
+        printOutScientists(ComputerScientists);
+    }
+    else if(number == 2)
+    {
+        insertion_name_za(ComputerScientists);
         printOutScientists(ComputerScientists);
     }
     else if(number == 3)
     {
+        insertion_born_desc(ComputerScientists);
         printOutScientists(ComputerScientists);
+    }
+    else if(number == 4)
+    {
+        insertion_born_asc(ComputerScientists);
+        printOutScientists(ComputerScientists);
+    }
+    else if(number == 9)
+    {
+        exit(1);
     }
     else
         pickOptions(number, ComputerScientists);
