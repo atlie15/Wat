@@ -20,6 +20,7 @@ string checkGender();
 string checkYearBorn();
 string checkYearDeath();
 void insertion_born(vector<Nerd>& ComputerScientists);
+void chooseView(vector<Nerd>& ComputerScientists);
 
 int main()
 {
@@ -141,7 +142,12 @@ void checkOptions(int &number, vector<Nerd> &ComputerScientists)
     switch(number)
     {
         case 1:
-            printOutScientists(ComputerScientists);
+            chooseView(ComputerScientists);
+            cout << endl << "Press Enter to continue.";
+            cin.get();
+            cin.ignore();
+            system("CLS");
+            pickOptions(number, ComputerScientists);
             break;
         case 2:
             system("CLS");
@@ -259,3 +265,26 @@ void insertion_born(vector<Nerd>& ComputerScientists)
     }
 }
 
+void chooseView(vector<Nerd>& ComputerScientists)
+{
+    int number;
+    cout << "How would you like to view the list?" << endl;
+    cout << "\t1. Name in alphabetical order [A-Z]" << endl;
+    cout << "\t2. Year of birth [descending]" << endl;
+    cout << "\t3. Default" << endl;
+    cout << endl;
+    cout << "Please select a number: ";
+    cin >> number;
+    cout << endl;
+    if (number == 2)
+    {
+        insertion_born(ComputerScientists);
+        printOutScientists(ComputerScientists);
+    }
+    else if(number == 3)
+    {
+        printOutScientists(ComputerScientists);
+    }
+    else
+        pickOptions(number, ComputerScientists);
+}
