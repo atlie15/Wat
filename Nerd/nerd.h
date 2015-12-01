@@ -20,6 +20,7 @@ public:
     void setYearBorn(string yB);
     void setYearDeath(string yD);
     friend void readMann(vector<Nerd>& ComputerScientists);
+    friend void insertion_born(vector<Nerd>& ComputerScientists);
 private:
     string name;
     string sex;

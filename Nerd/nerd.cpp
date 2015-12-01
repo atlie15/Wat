@@ -1,5 +1,4 @@
 #include "nerd.h"
-#include <QString>
 #include <string>
 Nerd::Nerd()
 {

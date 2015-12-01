@@ -19,6 +19,7 @@ void readNerd(vector<Nerd>& ComputerScientists);
 string checkGender();
 string checkYearBorn();
 string checkYearDeath();
+void insertion_born(vector<Nerd>& ComputerScientists);
 
 int main()
 {
@@ -40,6 +41,14 @@ void printOutScientists(const vector<Nerd> &ComputerScientists)
         string name = ComputerScientists[i].getName();
         name.resize(30, '\0');
         string gender = ComputerScientists[i].getGender();
+        if(gender == "m" || gender == "M")
+        {
+            gender = "Macho man";
+        }
+        else if(gender == "f" || gender == "F")
+        {
+            gender = "Woman";
+        }
         gender.resize(10, '\0');
         string yearBorn = ComputerScientists[i].getYearBorn();
         yearBorn.resize(9, '\0');
@@ -108,6 +117,7 @@ void pickOptions(int &number)
     cout << "\tPlease select a number: ";
     cin >> number;
 }
+
 void makeHeader()
 {
     cout << "Welcome to the Ultimade guide of Computer Scientists!" << endl;
@@ -231,3 +241,21 @@ string checkYearBorn()
 
     return yearBorn;
 }
+
+void insertion_born(vector<Nerd>& ComputerScientists)
+{
+    for (unsigned int i(0); i<(ComputerScientists.size()-1); i++)
+    {
+        int j=i;
+        Nerd temp;
+
+        while(j>=0 && atoi(ComputerScientists[j].yearBorn.c_str()) > atoi(ComputerScientists[j+1].yearBorn.c_str()))
+        {
+            temp = ComputerScientists[j];
+            ComputerScientists[j] = ComputerScientists[j+1];
+            ComputerScientists[j+1] = temp;
+            j--;
+        }
+    }
+}
+
