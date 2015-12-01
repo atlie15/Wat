@@ -19,7 +19,7 @@ void pickOptions(string &number, vector<Nerd> &ComputerScientists);
 void readNerd(vector<Nerd>& ComputerScientists);
 string checkGender();
 string checkYearBorn();
-string checkYearDeath();
+string checkYearDeath(string yearBorn);
 string checkName();
 void insertion_born_desc(vector<Nerd>& ComputerScientists);
 void insertion_born_asc(vector<Nerd>& ComputerScientists);
@@ -84,7 +84,7 @@ void addNerd(string &number, vector<Nerd> &ComputerScientists)
         name = checkName();
         sex = checkGender();
         yearBorn = checkYearBorn();
-        yearDeath = checkYearDeath();
+        yearDeath = checkYearDeath(yearBorn);
 
         ut << name << ";";
         ut << sex << ";";
@@ -98,6 +98,7 @@ void addNerd(string &number, vector<Nerd> &ComputerScientists)
         cout << endl;
         cout << "Would you like to input more Nerds (y/n)? ";
         cin >> ans;
+        cin.ignore();
 
     }while(ans == 'y' || ans=='Y');
 
@@ -105,11 +106,9 @@ void addNerd(string &number, vector<Nerd> &ComputerScientists)
     system("CLS");
     cout << "Redirecting to main menu" << endl;
     cout << endl;
-    cin.ignore();
     pickOptions(number, ComputerScientists);
 
 }
-
 
 void pickOptions(string &number, vector<Nerd> &ComputerScientists)
 {
@@ -129,7 +128,6 @@ void pickOptions(string &number, vector<Nerd> &ComputerScientists)
 
 void checkOptions(string &number, vector<Nerd> &ComputerScientists)
 {
-
     if(number == "1"){
             system("CLS");
             chooseView(ComputerScientists);
@@ -183,6 +181,7 @@ void addScientistsHeader(string &number, vector<Nerd> &ComputerScientists)
     cout << endl;
 
     cin >> quit;
+    cin.ignore();
     if(quit != 1)
     {
         system("CLS");
@@ -237,9 +236,8 @@ string checkGender()
     if(sex != "m" && sex != "M" && sex != "f" && sex != "F")
     {
         cout << "Invalid gender, please enter another" << endl;
-        checkGender();
+        return checkGender();
     }
-
     return sex;
 }
 
@@ -248,17 +246,18 @@ string checkYearBorn()
     string yearBorn;
     cout << "Born: ";
     getline(cin, yearBorn);
+
     for(unsigned int i = 0; i < yearBorn.size(); i++)
     {
-        if(!isdigit(yearBorn.at(i)))
+        if(!isdigit(yearBorn[i]))
         {
             cout << "Not a valid year, please enter another" << endl;
-            checkYearBorn();
-            break;
+            return checkYearBorn();
         }
     }
-    cout << "test" << endl;
+
     int value = atoi(yearBorn.c_str());
+    cout << value << endl;
     if(value <= 0 ||value >= 2015)
     {
         cout << "Not a valid year, please enter another" << endl;
@@ -399,35 +398,53 @@ void chooseView(vector<Nerd>& ComputerScientists)
 
 }
 
-string checkYearDeath()
+string checkYearDeath(string yearBorn)
 {
     string yearDeath;
     cout << "Death: ";
     getline(cin, yearDeath);
 
+    for(unsigned int i = 0; i < yearDeath.size(); i++)
+    {
+        if(!isdigit(yearDeath[i]))
+        {
+            cout << "Not a valid year, please enter another" << endl;
+            return checkYearDeath(yearBorn);
+        }
+    }
+
+    int value = atoi(yearDeath.c_str());
+    int yb = atoi(yearBorn.c_str());
+    if(value <= 0 ||value >= 2015)
+    {
+        cout << "Not a valid year, please enter another" << endl;
+        return checkYearDeath(yearBorn);
+    }
+
+    if(value <= yb)
+    {
+        cout << "Invalid year, the scientis didn't die before he was born? did he?" << endl;
+        return checkYearDeath(yearBorn);
+    }
+
     return yearDeath;
+
 }
 
 string checkName()
 {
-    string name;
-    bool invalid = false;
+    string name =  "";
     cout << "Scientist name: ";
-    cin.ignore();
     getline(cin, name);
 
     for(unsigned int i = 0; i < name.size(); i++)
     {
-        if(isdigit(name.at(i)) && invalid == false)
+        if(isdigit(name[i]))
         {
-            cout << "Not a valid name, please enter another" << endl;
-            invalid = true;
-            break;
+            cout << "Invalid name, please enter a name without numbers" << endl;
+            return checkName();
         }
     }
-    if(invalid)
-        checkName();
-    cout << "hallo" << endl;
     return name;
 }
 

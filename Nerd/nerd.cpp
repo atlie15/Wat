@@ -1,5 +1,4 @@
 #include "nerd.h"
-#include <string>
 Nerd::Nerd()
 {
 
@@ -13,24 +12,6 @@ Nerd::Nerd(string newName, string newSex, string newYearBorn, string newYearDeat
     yearDeath = newYearDeath;
 }
 
-void Nerd::setName(string x)
-{
-    name = x;
-}
-
-void Nerd::setGender(string s){
-    sex = s;
-}
-
-void Nerd::setYearBorn(string yB)
-{
-    yearBorn = yB;
-}
-
-void Nerd::setYearDeath(string yD)
-{
-    yearDeath = yD;
-}
 
 string Nerd::getName() const
 {
