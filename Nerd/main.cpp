@@ -16,6 +16,9 @@ void addScientistsHeader(int &number, vector<Nerd> &ComputerScientists);
 void addNerd(int &number, vector<Nerd> &ComputerScientists);
 void pickOptions(int &number, vector<Nerd> &ComputerScientists);
 void readNerd(vector<Nerd>& ComputerScientists);
+string checkGender();
+string checkYearBorn();
+string checkYearDeath();
 
 int main()
 {
@@ -30,15 +33,23 @@ int main()
 void printOutScientists(const vector<Nerd> &ComputerScientists)
 {
     system("CLS");
-    cout << "Name Gender     Year born\tYear death" << endl;
-    cout << "\t--------------------------------------------------" << endl;
+    cout << "Number\tName                          \t\tGender\t        Year born\tYear death" << endl;
+    cout << "\t----------------------------------------------------------------------------------" << endl;
     for(unsigned int i = 0; i < ComputerScientists.size(); i++)
     {
-        cout << i + 1;
-        cout << "\t" << ComputerScientists[i].getName();
-        cout << "\t" << ComputerScientists[i].getGender();
-        cout << "\t" << ComputerScientists[i].getYearBorn();
-        cout << "\t" << ComputerScientists[i].getYearDeath() << endl;
+        string name = ComputerScientists[i].getName();
+        name.resize(30, '\0');
+        string gender = ComputerScientists[i].getGender();
+        gender.resize(10, '\0');
+        string yearBorn = ComputerScientists[i].getYearBorn();
+        yearBorn.resize(9, '\0');
+        string yearDeath = ComputerScientists[i].getYearDeath();
+        yearDeath.resize(10, '\0');
+        cout << i + 1 << "\t|";
+        cout << " " << name;
+        cout << "\t" << gender;
+        cout << "\t" << yearBorn;
+        cout << "\t" << yearDeath << endl;
     }
 }
 
@@ -59,12 +70,11 @@ void addNerd(int &number, vector<Nerd> &ComputerScientists)
         cout << "Scientist name: ";
         cin.ignore();
         getline(cin, name);
-        cout << "Gender: ";
-        cin >> sex;
-        cout << "Born: ";
-        cin >> yearBorn;
+        sex = checkGender();
+        yearBorn = checkYearBorn();
+        cout << "hallo" << endl;
         cout << "Death: ";
-        cin >> yearDeath;
+        getline(cin, yearDeath);
 
         ut << name << ";";
         ut << sex << ";";
@@ -191,7 +201,33 @@ void readNerd(vector<Nerd>& ComputerScientists)
 
             ComputerScientists.push_back(pepe);
         }
+    }
+}
 
+string checkGender()
+{
+    string sex;
+    cout << "Gender(m/f): ";
+    getline(cin, sex);
+    if(sex != "m" && sex != "f")
+    {
+        cout << "Invalid gender, please enter another" << endl;
+        checkGender();
     }
 
+    return sex;
+}
+
+string checkYearBorn()
+{
+    string yearBorn;
+    cout << "Born: ";
+    getline(cin, yearBorn);
+    if(!isdigit(atoi(yearBorn.c_str())))
+    {
+        cout << "Invalid year, please enter another" << endl;
+        checkYearBorn();
+    }
+
+    return yearBorn;
 }
