@@ -2,7 +2,10 @@
 
 Nerd::Nerd()
 {
-
+    name = "";
+    sex = "";
+    yearBorn = "";
+    yearDeath = "";
 }
 
 Nerd::Nerd(string newName, string newSex, string newYearBorn, string newYearDeath)
@@ -37,19 +40,24 @@ void Nerd::init()
 {
     vector<Nerd> ComputerScientists;
     readNerd(ComputerScientists);
+
     string chooseNumber = "";
+
     pickOptions(chooseNumber, ComputerScientists);
 }
 
 void Nerd::printOutScientists(const vector<Nerd> &ComputerScientists)
 {
     system("CLS");
+
     cout << "Number\tName                          \t\tGender\t        Year born\tYear death" << endl;
     cout << "\t----------------------------------------------------------------------------------" << endl;
+
     for(unsigned int i = 0; i < ComputerScientists.size(); i++)
     {
         string name = ComputerScientists[i].getName();
         name.resize(30, '\0');
+
         string gender = ComputerScientists[i].getGender();
         if(gender == "m" || gender == "M")
         {
@@ -60,10 +68,13 @@ void Nerd::printOutScientists(const vector<Nerd> &ComputerScientists)
             gender = "Female";
         }
         gender.resize(10, '\0');
+
         string yearBorn = ComputerScientists[i].getYearBorn();
         yearBorn.resize(9, '\0');
+
         string yearDeath = ComputerScientists[i].getYearDeath();
         yearDeath.resize(10, '\0');
+
         cout << i + 1 << "\t|";
         cout << " " << name;
         cout << "\t" << gender;
@@ -83,6 +94,7 @@ void Nerd::addNerd(string &number, vector<Nerd> &ComputerScientists)
     ofstream ut;
 
     ut.open("../nerds.csv", std::ios_base::app);
+
     addScientistsHeader(number, ComputerScientists);
     do
     {
@@ -108,9 +120,12 @@ void Nerd::addNerd(string &number, vector<Nerd> &ComputerScientists)
     }while(ans == 'y' || ans=='Y');
 
     ut.close();
+
     system("CLS");
+
     cout << "Redirecting to main menu" << endl;
     cout << endl;
+
     pickOptions(number, ComputerScientists);
 }
 
@@ -127,12 +142,14 @@ void Nerd::pickOptions(string &number, vector<Nerd> &ComputerScientists)
     cout << "Please select a number: ";
     getline(cin, number);
     cout << endl;
+
     checkOptions(number, ComputerScientists);
 }
 
 void Nerd::checkOptions(string &number, vector<Nerd> &ComputerScientists)
 {
-    if(number == "1"){
+    if(number == "1")
+    {
             system("CLS");
             chooseView(ComputerScientists);
             cout << endl << "Press Enter to return to main menu.";
@@ -140,11 +157,13 @@ void Nerd::checkOptions(string &number, vector<Nerd> &ComputerScientists)
             system("CLS");
             pickOptions(number, ComputerScientists);
     }
-    else if(number == "2"){
+    else if(number == "2")
+    {
            system("CLS");
            addNerd(number, ComputerScientists);
-   }
-    else if(number == "3"){
+    }
+    else if(number == "3")
+    {
         system("CLS");
         killNerd(ComputerScientists);
         ComputerScientists.clear();
@@ -154,7 +173,8 @@ void Nerd::checkOptions(string &number, vector<Nerd> &ComputerScientists)
         system("CLS");
         pickOptions(number, ComputerScientists);
     }
-     else if(number == "4"){
+     else if(number == "4")
+    {
             system("CLS");
             findNerd(ComputerScientists);
             cout << endl << "Press Enter to continue.";
@@ -162,7 +182,8 @@ void Nerd::checkOptions(string &number, vector<Nerd> &ComputerScientists)
             system("CLS");
             pickOptions(number, ComputerScientists);
     }
-    else if(number == "9"){
+    else if(number == "9")
+    {
             cout << "Program shut down" << endl;
             exit(1);
     }
@@ -178,6 +199,7 @@ void Nerd::checkOptions(string &number, vector<Nerd> &ComputerScientists)
 void Nerd::addScientistsHeader(string &number, vector<Nerd> &ComputerScientists)
 {
     int quit;
+
     cout << "Enter a Scientist" << endl;
     cout << "-----------------------------------------------------" << endl;
     cout << "\t1. Add Scientist to your list" << endl;
@@ -232,19 +254,23 @@ void Nerd::readNerd(vector<Nerd>& ComputerScientists)
 string Nerd::checkGender()
 {
     string sex;
+
     cout << "Gender(m/f): ";
     getline(cin, sex);
+
     if(sex != "m" && sex != "M" && sex != "f" && sex != "F")
     {
         cout << "Invalid gender, please enter another" << endl;
         return checkGender();
     }
+
     return sex;
 }
 
 string Nerd::checkYearBorn()
 {
     string yearBorn;
+
     cout << "Born: ";
     getline(cin, yearBorn);
 
@@ -258,6 +284,7 @@ string Nerd::checkYearBorn()
     }
 
     int value = atoi(yearBorn.c_str());
+
     if(value <= 0 ||value >= 2015)
     {
         cout << "Not a valid year, please enter another" << endl;
@@ -352,6 +379,7 @@ void Nerd::insertion_name_za(vector<Nerd>& ComputerScientists)
 void Nerd::chooseView(vector<Nerd>& ComputerScientists)
 {
     string number = "";
+
     cout << "How would you like to view the list?" << endl;
     cout << "-----------------------------------------------------" << endl;
     cout << "\t1. Name in alphabetical order [A-Z]" << endl;
@@ -361,9 +389,11 @@ void Nerd::chooseView(vector<Nerd>& ComputerScientists)
     cout << "\t5. Default" << endl;
     cout << "\t9. Back to main menu." << endl;
     cout << endl;
+
     cout << "Please select a number: ";
     getline(cin, number);
     cout << endl;
+
     if (number == "1")
     {
         insertion_name_az(ComputerScientists);
@@ -405,6 +435,7 @@ void Nerd::chooseView(vector<Nerd>& ComputerScientists)
 string Nerd::checkYearDeath(string yearBorn)
 {
     string yearDeath;
+
     cout << "Death: ";
     getline(cin, yearDeath);
 
@@ -419,6 +450,7 @@ string Nerd::checkYearDeath(string yearBorn)
 
     int value = atoi(yearDeath.c_str());
     int yb = atoi(yearBorn.c_str());
+
     if(value <= 0 ||value >= 2015)
     {
         cout << "Not a valid year, please enter another" << endl;
@@ -427,19 +459,17 @@ string Nerd::checkYearDeath(string yearBorn)
 
     if(value <= yb)
     {
-        cout << value << endl;
-        cout << yb << endl;
         cout << "Invalid year, the scientis didn't die before he was born? did he?" << endl;
         return checkYearDeath(yearBorn);
     }
-    cout << value << endl;
-    return yearDeath;
 
+    return yearDeath;
 }
 
 string Nerd::checkName()
 {
     string name =  "";
+
     cout << "Scientist name: ";
     getline(cin, name);
 
@@ -458,8 +488,10 @@ void Nerd::findNerd(const vector<Nerd> ComputerScientists)
 {
     int counter = 0;
     vector<Nerd> temp;
+
     cout << "Search a Scientist" << endl;
     cout << "-----------------------------------------------------" << endl;
+
     string ans;
     cout << "Search for scientist's name: ";
     getline(cin, ans);
@@ -474,6 +506,7 @@ void Nerd::findNerd(const vector<Nerd> ComputerScientists)
             counter++;
         }
     }
+
     if(counter == 0)
     {
         cout << endl << "No search resault found" << endl;
@@ -487,9 +520,11 @@ void Nerd::findNerd(const vector<Nerd> ComputerScientists)
 void Nerd::killNerd(const vector<Nerd> x)
 {
     int counter = 0;
+
     vector<Nerd> ComputerScientists;
     ComputerScientists = x;
     vector<Nerd> temp;
+
     string ans;
     cout << "Remove a Scientist" << endl;
     cout << "-----------------------------------------------------" << endl;
@@ -499,7 +534,6 @@ void Nerd::killNerd(const vector<Nerd> x)
 
     for(unsigned int i(0); i<ComputerScientists.size(); i++)
     {
-
         std::size_t found = ComputerScientists[i].name.find(ans);
 
         if(found < 100)
@@ -510,6 +544,7 @@ void Nerd::killNerd(const vector<Nerd> x)
             counter++;
         }
     }
+
     if(counter == 0)
     {
         cout << endl <<"No scientists found, returning you to main menu" << endl;
@@ -519,10 +554,12 @@ void Nerd::killNerd(const vector<Nerd> x)
         cout << endl;
         cout << "---------------------------------------------" << endl;
         cout << "Erasing these nerds." << endl;
+
         for(unsigned int i(0); i<temp.size(); i++)
         {
             cout << "\t" << temp[i].name << endl;
         }
+
         cout << "---------------------------------------------" << endl;
         cout << endl;
         cout << "Do you confirm ? (y/n)" << endl;
@@ -543,6 +580,7 @@ void Nerd::killNerd(const vector<Nerd> x)
                 killer << ComputerScientists[i].yearBorn << ";";
                 killer << ComputerScientists[i].yearDeath << endl;
             }
+
             killer.close();
         }
     }
