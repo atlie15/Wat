@@ -6,6 +6,7 @@
 #include <sstream>
 
 #include "nerd.h"
+#include "interface.h"
 
 using namespace std;
 
