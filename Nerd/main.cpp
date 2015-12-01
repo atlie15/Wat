@@ -163,9 +163,11 @@ void checkOptions(string &number, vector<Nerd> &ComputerScientists)
             cout << "Program shut down" << endl;
             exit(1);
     }
-    else{
-            cout << endl;
+    else
+    {
+            system("CLS");
             cout << "Option not found, please enter another number" << endl;
+            cout << endl;
             pickOptions(number, ComputerScientists);
     }
 }
