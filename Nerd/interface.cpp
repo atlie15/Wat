@@ -18,5 +18,4 @@ void interface::pickOptions(string &number, vector<Nerd> &ComputerScientists)
     cout << "Please select a number: ";
     getline(cin, number);
     cout << endl;
-    checkOptions(number, ComputerScientists);
 }
