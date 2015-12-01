@@ -23,6 +23,7 @@ public:
     friend void insertion_born_asc(vector<Nerd>& ComputerScientists);
     friend void insertion_name_az(vector<Nerd>& ComputerScientists);
     friend void insertion_name_za(vector<Nerd>& ComputerScientists);
+    friend void findNerd(const vector<Nerd> ComputerScientists);
 private:
     string name;
     string sex;

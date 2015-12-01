@@ -10,11 +10,11 @@
 using namespace std;
 
 void printOutScientists(const vector<Nerd> &ComputerScientists);
-void checkOptions(int &number, vector<Nerd> &ComputerScientists);
+void checkOptions(string &number, vector<Nerd> &ComputerScientists);
 void makeHeader();
-void addScientistsHeader(int &number, vector<Nerd> &ComputerScientists);
-void addNerd(int &number, vector<Nerd> &ComputerScientists);
-void pickOptions(int &number, vector<Nerd> &ComputerScientists);
+void addScientistsHeader(string &number, vector<Nerd> &ComputerScientists);
+void addNerd(string &number, vector<Nerd> &ComputerScientists);
+void pickOptions(string &number, vector<Nerd> &ComputerScientists);
 void readNerd(vector<Nerd>& ComputerScientists);
 string checkGender();
 string checkYearBorn();
@@ -30,7 +30,7 @@ int main()
 {
     vector<Nerd> ComputerScientists;
     readNerd(ComputerScientists);
-    int chooseNumber;
+    string chooseNumber = "";
     makeHeader();
     pickOptions(chooseNumber, ComputerScientists);
     return 0;
@@ -67,7 +67,7 @@ void printOutScientists(const vector<Nerd> &ComputerScientists)
     }
 }
 
-void addNerd(int &number, vector<Nerd> &ComputerScientists)
+void addNerd(string &number, vector<Nerd> &ComputerScientists)
 {
     string name;
     string sex;
@@ -115,7 +115,7 @@ void makeHeader()
     cout << "-----------------------------------------------------" << endl;
 }
 
-void pickOptions(int &number, vector<Nerd> &ComputerScientists)
+void pickOptions(string &number, vector<Nerd> &ComputerScientists)
 {
     cout << "\t1. Show a list of every computer scientists" << endl;
     cout << "\t2. Add computer scientist to the list" << endl;
@@ -123,42 +123,46 @@ void pickOptions(int &number, vector<Nerd> &ComputerScientists)
     cout << "\t9. Quit program" << endl;
     cout << endl;
     cout << "Please select a number: ";
-    cin >> number;
+    getline(cin, number);
     cout << endl;
     checkOptions(number, ComputerScientists);
 }
 
-void checkOptions(int &number, vector<Nerd> &ComputerScientists)
+void checkOptions(string &number, vector<Nerd> &ComputerScientists)
 {
-    switch(number)
-    {
-        case 1:
+
+    if(number == "1"){
             chooseView(ComputerScientists);
             cout << endl << "Press Enter to continue.";
             cin.get();
             cin.ignore();
             system("CLS");
             pickOptions(number, ComputerScientists);
-            break;
-        case 2:
+    }
+     else if(number == "2"){
             system("CLS");
             addNerd(number, ComputerScientists);
-            break;
-        case 3:
+    }
+     else if(number == "3"){
             system("CLS");
-            break;
-        case 9:
+            findNerd(ComputerScientists);
+            cout << endl << "Press Enter to continue.";
+            cin.ignore();
+            system("CLS");
+            pickOptions(number, ComputerScientists);
+    }
+    else if(number == "9"){
             cout << "Program shut down" << endl;
             exit(1);
-            break;
-        default:
+    }
+    else{
             cout << endl;
             cout << "Option not found, please enter another number" << endl;
             pickOptions(number, ComputerScientists);
     }
 }
 
-void addScientistsHeader(int &number, vector<Nerd> &ComputerScientists)
+void addScientistsHeader(string &number, vector<Nerd> &ComputerScientists)
 {
     int quit;
     cout << "Enter a Scientist" << endl;
@@ -337,7 +341,7 @@ void insertion_name_za(vector<Nerd>& ComputerScientists)
 
 void chooseView(vector<Nerd>& ComputerScientists)
 {
-    int number;
+    string number = "";
     cout << "How would you like to view the list?" << endl;
     cout << "\t1. Name in alphabetical order [A-Z]" << endl;
     cout << "\t2. Name in alphabetical order [Z-A]" << endl;
@@ -346,29 +350,29 @@ void chooseView(vector<Nerd>& ComputerScientists)
     cout << "\t9. Quit program." << endl;
     cout << endl;
     cout << "Please select a number: ";
-    cin >> number;
+    getline(cin, number);
     cout << endl;
-    if (number == 1)
+    if (number == "1")
     {
         insertion_name_az(ComputerScientists);
         printOutScientists(ComputerScientists);
     }
-    else if(number == 2)
+    else if(number == "2")
     {
         insertion_name_za(ComputerScientists);
         printOutScientists(ComputerScientists);
     }
-    else if(number == 3)
+    else if(number == "3")
     {
         insertion_born_desc(ComputerScientists);
         printOutScientists(ComputerScientists);
     }
-    else if(number == 4)
+    else if(number == "4")
     {
         insertion_born_asc(ComputerScientists);
         printOutScientists(ComputerScientists);
     }
-    else if(number == 9)
+    else if(number == "9")
     {
         exit(1);
     }
@@ -406,4 +410,26 @@ string checkName()
         checkName();
     cout << "hallo" << endl;
     return name;
+}
+
+void findNerd(const vector<Nerd> ComputerScientists)
+{
+    vector<Nerd> temp;
+
+    string ans;
+    cout << "Search for scientist's name: ";
+    cin.ignore();
+    getline(cin, ans);
+
+    for(unsigned int i(0); i<ComputerScientists.size(); i++)
+    {
+        std::size_t found = ComputerScientists[i].name.find(ans);
+
+        if (found == 0)
+        {
+            temp.push_back(ComputerScientists[i]);
+        }
+    }
+
+    printOutScientists(temp);
 }
