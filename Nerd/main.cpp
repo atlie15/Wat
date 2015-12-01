@@ -13,6 +13,7 @@ void printOutScientists(const vector<Nerd> &ComputerScientists);
 void checkOptions(string &number, vector<Nerd> &ComputerScientists);
 void addScientistsHeader(string &number, vector<Nerd> &ComputerScientists);
 void addNerd(string &number, vector<Nerd> &ComputerScientists);
+void killNerd(vector<Nerd> &ComputerScientists);
 void pickOptions(string &number, vector<Nerd> &ComputerScientists);
 void readNerd(vector<Nerd>& ComputerScientists);
 string checkGender();
@@ -115,7 +116,8 @@ void pickOptions(string &number, vector<Nerd> &ComputerScientists)
     cout << "-----------------------------------------------------" << endl;
     cout << "\t1. Show a list of every computer scientists" << endl;
     cout << "\t2. Add computer scientist to the list" << endl;
-    cout << "\t3. Search for scientists in the list" << endl;
+    cout << "\t3. Remove computer scientist from the list" << endl;
+    cout << "\t4. Search for scientists in the list" << endl;
     cout << "\t9. Quit program" << endl;
     cout << endl;
     cout << "Please select a number: ";
@@ -135,11 +137,19 @@ void checkOptions(string &number, vector<Nerd> &ComputerScientists)
             system("CLS");
             pickOptions(number, ComputerScientists);
     }
-     else if(number == "2"){
-            system("CLS");
-            addNerd(number, ComputerScientists);
+    else if(number == "2"){
+           system("CLS");
+           addNerd(number, ComputerScientists);
+   }
+    else if(number == "3"){
+        system("CLS");
+        killNerd(ComputerScientists);
+        cout << endl << "Press Enter to return to main menu.";
+        cin.get();
+        system("CLS");
+        pickOptions(number, ComputerScientists);
     }
-     else if(number == "3"){
+     else if(number == "4"){
             system("CLS");
             findNerd(ComputerScientists);
             cout << endl << "Press Enter to continue.";
@@ -437,4 +447,57 @@ void findNerd(const vector<Nerd> ComputerScientists)
     }
 
     printOutScientists(temp);
+}
+
+
+void killNerd(vector<Nerd>& ComputerScientists)
+{
+    vector<Nerd> temp;
+    string ans;
+    cout << "Who would you like to erase ? " << endl;
+
+    getline(cin, ans);
+
+    for(unsigned int i(0); i<ComputerScientists.size(); i++)
+    {
+
+        std::size_t found = ComputerScientists[i].name.find(ans);
+
+        if(found < 100)
+        {
+            temp.push_back(ComputerScientists[i]);
+            ComputerScientists.erase(ComputerScientists.begin()+i);
+            i--;
+        }
+
+    }
+        cout << endl;
+        cout << "---------------------------------------------" << endl;
+        cout << "Erasing these nerds." << endl;
+        for(unsigned int i(0); i<temp.size(); i++)
+        {
+            cout << "\t" << temp[i].name << endl;
+        }
+        cout << "---------------------------------------------" << endl;
+        cout << endl;
+        cout << "Do you confirm ? (y/n)" << endl;
+
+        string confirmed;
+        getline(cin, confirmed);
+
+        if (confirmed == "y")
+        {
+            ofstream killer;
+
+            killer.open("../../nerds.txt");
+
+            for (unsigned int i(0); i<ComputerScientists.size(); i++)
+            {
+                killer << ComputerScientists[i].name << ";";
+                killer << ComputerScientists[i].sex << ";";
+                killer << ComputerScientists[i].yearBorn << ";";
+                killer << ComputerScientists[i].yearDeath << endl;
+            }
+            killer.close();
+        }
 }
