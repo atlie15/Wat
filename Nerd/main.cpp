@@ -51,7 +51,7 @@ void printOutScientists(const vector<Nerd> &ComputerScientists)
         }
         else if(gender == "f" || gender == "F")
         {
-            gender = "female";
+            gender = "Female";
         }
         gender.resize(10, '\0');
         string yearBorn = ComputerScientists[i].getYearBorn();
@@ -233,7 +233,7 @@ string checkGender()
     string sex;
     cout << "Gender(m/f): ";
     getline(cin, sex);
-    if(sex != "m" && sex != "f")
+    if(sex != "m" && sex != "M" && sex != "f" && sex != "F")
     {
         cout << "Invalid gender, please enter another" << endl;
         checkGender();
@@ -439,18 +439,26 @@ void findNerd(const vector<Nerd> ComputerScientists)
     cout << "Search for scientist's name: ";
     cin.ignore();
     getline(cin, ans);
-
-    for(unsigned int i(0); i<ComputerScientists.size(); i++)
+    if(ans == " ")
     {
-        std::size_t found = ComputerScientists[i].name.find(ans);
-
-        if (found <= 30)
+        cout << "not valid search string, please enter another" << endl;
+        findNerd(ComputerScientists);
+    }
+    else
+    {
+        for(unsigned int i(0); i<ComputerScientists.size(); i++)
         {
-            temp.push_back(ComputerScientists[i]);
+            std::size_t found = ComputerScientists[i].name.find(ans);
+
+            if (found <= 30)
+            {
+                temp.push_back(ComputerScientists[i]);
+            }
         }
+
+        printOutScientists(temp);
     }
 
-    printOutScientists(temp);
 }
 
 
