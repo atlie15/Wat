@@ -258,11 +258,10 @@ string Nerd::checkYearBorn()
     }
 
     int value = atoi(yearBorn.c_str());
-    cout << value << endl;
     if(value <= 0 ||value >= 2015)
     {
         cout << "Not a valid year, please enter another" << endl;
-        checkYearBorn();
+        return checkYearBorn();
     }
 
     return yearBorn;
@@ -428,10 +427,12 @@ string Nerd::checkYearDeath(string yearBorn)
 
     if(value <= yb)
     {
+        cout << value << endl;
+        cout << yb << endl;
         cout << "Invalid year, the scientis didn't die before he was born? did he?" << endl;
         return checkYearDeath(yearBorn);
     }
-
+    cout << value << endl;
     return yearDeath;
 
 }
