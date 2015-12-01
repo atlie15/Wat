@@ -76,7 +76,7 @@ void addNerd(string &number, vector<Nerd> &ComputerScientists)
 
     ofstream ut;
 
-    ut.open("../../nerds.txt", std::ios_base::app);
+    ut.open("../nerds.csv", std::ios_base::app);
     addScientistsHeader(number, ComputerScientists);
     do
     {
@@ -196,7 +196,7 @@ void readNerd(vector<Nerd>& ComputerScientists)
 {
     ifstream read;
 
-    read.open("../../nerds.txt");
+    read.open("../nerds.csv");
 
     string x;
     string y;
@@ -503,7 +503,7 @@ void killNerd(const vector<Nerd> x)
         {
             ofstream killer;
 
-            killer.open("../../nerds.txt");
+            killer.open("../nerds.csv");
 
             for (unsigned int i(0); i<ComputerScientists.size(); i++)
             {
