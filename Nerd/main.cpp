@@ -185,7 +185,6 @@ void addScientistsHeader(string &number, vector<Nerd> &ComputerScientists)
     if(quit != 1)
     {
         system("CLS");
-        cin.ignore();
         pickOptions(number, ComputerScientists);
     }
     system("CLS");
@@ -358,6 +357,7 @@ void chooseView(vector<Nerd>& ComputerScientists)
     cout << "\t2. Name in alphabetical order [Z-A]" << endl;
     cout << "\t3. Year of birth [descending]" << endl;
     cout << "\t4. Year of birth [ascending]" << endl;
+    cout << "\t5. Default" << endl;
     cout << "\t9. Back to main menu." << endl;
     cout << endl;
     cout << "Please select a number: ";
@@ -381,6 +381,10 @@ void chooseView(vector<Nerd>& ComputerScientists)
     else if(number == "4")
     {
         insertion_born_asc(ComputerScientists);
+        printOutScientists(ComputerScientists);
+    }
+    else if(number == "5")
+    {
         printOutScientists(ComputerScientists);
     }
     else if(number == "9")
@@ -481,6 +485,7 @@ void findNerd(const vector<Nerd> ComputerScientists)
 
 void killNerd(const vector<Nerd> x)
 {
+    int counter = 0;
     vector<Nerd> ComputerScientists;
     ComputerScientists = x;
     vector<Nerd> temp;
@@ -501,9 +506,15 @@ void killNerd(const vector<Nerd> x)
             temp.push_back(ComputerScientists[i]);
             ComputerScientists.erase(ComputerScientists.begin()+i);
             i--;
+            counter++;
         }
-
     }
+    if(counter == 0)
+    {
+        cout << endl <<"No scientists found, returning you to main menu" << endl;
+    }
+    else
+    {
         cout << endl;
         cout << "---------------------------------------------" << endl;
         cout << "Erasing these nerds." << endl;
@@ -533,4 +544,5 @@ void killNerd(const vector<Nerd> x)
             }
             killer.close();
         }
+    }
 }
