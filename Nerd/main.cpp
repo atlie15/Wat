@@ -433,33 +433,32 @@ string checkName()
 
 void findNerd(const vector<Nerd> ComputerScientists)
 {
+    int counter = 0;
     vector<Nerd> temp;
     cout << "Search a Scientist" << endl;
     cout << "-----------------------------------------------------" << endl;
     string ans;
     cout << "Search for scientist's name: ";
-    cin.ignore();
     getline(cin, ans);
-    if(ans == " ")
+
+    for(unsigned int i(0); i<ComputerScientists.size(); i++)
     {
-        cout << "not valid search string, please enter another" << endl;
-        findNerd(ComputerScientists);
+        std::size_t found = ComputerScientists[i].name.find(ans);
+
+        if (found <= 30)
+        {
+            temp.push_back(ComputerScientists[i]);
+            counter++;
+        }
+    }
+    if(counter == 0)
+    {
+        cout << endl << "No search resault found" << endl;
     }
     else
     {
-        for(unsigned int i(0); i<ComputerScientists.size(); i++)
-        {
-            std::size_t found = ComputerScientists[i].name.find(ans);
-
-            if (found <= 30)
-            {
-                temp.push_back(ComputerScientists[i]);
-            }
-        }
-
         printOutScientists(temp);
     }
-
 }
 
 
@@ -469,7 +468,9 @@ void killNerd(const vector<Nerd> x)
     ComputerScientists = x;
     vector<Nerd> temp;
     string ans;
-    cout << "Who would you like to erase ? " << endl;
+    cout << "Remove a Scientist" << endl;
+    cout << "-----------------------------------------------------" << endl;
+    cout << "Who would you like to erase ? ";
 
     getline(cin, ans);
 
