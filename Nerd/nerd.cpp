@@ -198,7 +198,7 @@ void Nerd::checkOptions(string &number, vector<Nerd> &ComputerScientists)
 
 void Nerd::addScientistsHeader(string &number, vector<Nerd> &ComputerScientists)
 {
-    int quit;
+    string quit;
 
     cout << "Enter a Scientist" << endl;
     cout << "-----------------------------------------------------" << endl;
@@ -206,11 +206,11 @@ void Nerd::addScientistsHeader(string &number, vector<Nerd> &ComputerScientists)
     cout << "\t9. Return to main menu" << endl;
     cout << endl;
 
-    cin >> quit;
-    cin.ignore();
-    if(quit != 1)
+    getline(cin, quit);
+    if(quit != "1")
     {
         system("CLS");
+        cout << "Invalid option, returning you to main menu" << endl << endl;
         pickOptions(number, ComputerScientists);
     }
     system("CLS");

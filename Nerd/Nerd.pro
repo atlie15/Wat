@@ -12,6 +12,5 @@ SOURCES += main.cpp \
     interface.cpp
 
 HEADERS += \
-    nerd.h \
-    interface.h
+    nerd.h
 
