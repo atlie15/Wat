@@ -436,9 +436,14 @@ string Nerd::checkYearDeath(string yearBorn)
 {
     string yearDeath;
 
+    cout << "Write \"alive\" if the scientist has not passed away" << endl;
     cout << "Death: ";
     getline(cin, yearDeath);
 
+    if(yearDeath == "alive" || yearDeath == "Alive")
+    {
+        return yearDeath;
+    }
     for(unsigned int i = 0; i < yearDeath.size(); i++)
     {
         if(!isdigit(yearDeath[i]))
